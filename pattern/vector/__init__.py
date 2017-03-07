@@ -103,6 +103,16 @@ def decode_string(v, encoding="utf-8"):
 
 
 def encode_string(v, encoding="utf-8"):
+    encoding = ((encoding,),) + (("windows-1252",), ("utf-8", "ignore"),("utf-16",))
+    for e in encoding:
+        try:
+            return v.encode(*e)
+        except:
+            pass
+    return v
+'''
+
+def encode_string(v, encoding="utf-8"):
     """Returns the given value as a Python byte string (if possible)."""
     if isinstance(encoding, basestring):
         encoding = ((encoding,),) + (("windows-1252",), ("utf-8", "ignore"))
@@ -114,7 +124,7 @@ def encode_string(v, encoding="utf-8"):
                 pass
         return v
     return str(v)
-
+'''
 decode_utf8 = decode_string
 encode_utf8 = encode_string
 
